@@ -1,22 +1,9 @@
 services:
-    composer:
-        image: composer:2
-        working_dir: /app
-        user: 1000:1000
-        volumes:
-            - .:/app
-
     app:
-        image: php:8.3-cli
-        working_dir: /app
+        build: '.docker'
+        image: 'luismeirelles/laravel-arch-tests:latest'
+        working_dir: '/app'
         volumes:
-            - .:/app
-            - ~/.config/psysh:/.config/psysh
-        user: 1000:1000
-        network_mode: host
-
-    node:
-        image: node:20-alpine
-        working_dir: /app
-        volumes:
-            - .:/app
+            - '.:/app'
+            - '~/.config/psysh:/.config/psysh'
+        network_mode: 'host'
